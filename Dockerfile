@@ -13,6 +13,9 @@ COPY --from=build /opt/bsc-mainnet /usr/share/
 RUN adduser -D -u 1000 runner
 USER runner
 WORKDIR /home/runner
-RUN /usr/local/bin/geth --nousb --datadir node init /usr/share/genesis.json
+#RUN /usr/local/bin/geth --nousb --datadir node init /usr/share/genesis.json
 EXPOSE 8545 8546 8547 30303 30303/udp
-ENTRYPOINT ["geth"]
+#ENTRYPOINT ["geth"]
+COPY ./entrypoint.sh /opt/bsc-entrypoint.sh
+ENTRYPOINT ["/opt/bsc-entrypoint.sh"]
+
